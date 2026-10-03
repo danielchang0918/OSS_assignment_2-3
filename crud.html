@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>게임 캐릭터창</title>
+</head>
+<body>
+    <h1>RPG 게임 캐릭터 관리</h1>
+
+    <form id="characterInfo">
+        <label>닉네임</label>
+        <input type="text"><br>
+        <label>클래스</label>
+        <select>
+            <option value="warrior">전사</option>
+            <option value="warrior">궁수</option>
+            <option value="warrior">마법사</option>
+            <option value="warrior">도적</option>
+            <option value="warrior">성기사</option>
+        </select><br>
+        <label>레벨</label>
+        <input type="number"><br>
+        <label>공격력</label>
+        <input type="number"><br>
+        <label>수비력</label>
+        <input type="number"><br>
+        <label>스피드</label>
+        <input type="number"><br>
+
+        <button>생성</button>
+    </form>
+
+    <hr>
+</body>
+</html>
+
+<script>
+    let characters = [
+        {
+            nickname: "아르테미스",
+            class: "궁수",
+            level: 100,
+            attack: 85,
+            defense: 20,
+            speed: 150
+        },
+        {
+            nickname: "카이저",
+            class: "전사",
+            level: 83,
+            attack: 70,
+            defense: 80,
+            speed: 30
+        },
+        {
+            nickname: "스펠위버",
+            class: "마법사",
+            level: 140,
+            attack: 120,
+            defense: 20,
+            speed: 60
+        },
+    ]
+</script>
