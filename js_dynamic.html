@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <input type="text" id="fruit-input">
+    <button id="addbtn">추가</button>
+
+    <ul id="list">
+        
+    </ul>
+</body>
+</html>
+
+<script>
+    const addbtn = document.querySelector("#addbtn");
+    const list = document.querySelector("#list");
+    const text = document.querySelector("#fruit-input");
+
+    addbtn.addEventListener("click", function(){
+        const obj = document.createElement("li");
+        obj.textContent= text.value + " ";
+        list.appendChild(obj);
+        const delbtn = document.createElement("button");
+        delbtn.textContent= "삭제";
+
+        delbtn.addEventListener("click", function(e){
+            e.target.parentElement.remove();
+        })
+
+        obj.appendChild(delbtn);
+
+        
+        text.value = "";
+    })
+</script>
