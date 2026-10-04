@@ -16,11 +16,11 @@
         <input type="text" id="nickname" required><br>
         <label for="uClass">클래스</label>
         <select id="uClass" required>
-            <option value="warrior">전사</option>
-            <option value="archer">궁수</option>
-            <option value="wizard">마법사</option>
-            <option value="thief">도적</option>
-            <option value="paladin">성기사</option>
+            <option value="전사">전사</option>
+            <option value="궁수">궁수</option>
+            <option value="마법사">마법사</option>
+            <option value="도적">도적</option>
+            <option value="성기사">성기사</option>
         </select><br>
         <label for="level">레벨</label>
         <input type="number" id="level" required><br>
@@ -50,46 +50,8 @@
             </tr>
         </thead>
 
-        <tbody>
-            <tr>
-                <td>1</td>
-                <td>아르테미스</td>
-                <td>궁수</td>
-                <td>100</td>
-                <td>85</td>
-                <td>20</td>
-                <td>150</td>
-                <td>
-                    <button>수정</button>
-                    <button>삭제</button>
-                </td>
-            </tr>
-            <tr>
-                <td>2</td>
-                <td>카이저</td>
-                <td>전사</td>
-                <td>83</td>
-                <td>70</td>
-                <td>80</td>
-                <td>30</td>
-                <td>
-                    <button>수정</button>
-                    <button>삭제</button>
-                </td>
-            </tr>
-            <tr>
-                <td>3</td>
-                <td>스펠위버</td>
-                <td>마법사</td>
-                <td>140</td>
-                <td>120</td>
-                <td>20</td>
-                <td>60</td>
-                <td>
-                    <button>수정</button>
-                    <button>삭제</button>
-                </td>
-            </tr>
+        <tbody id="characterList">
+            
         </tbody>
     </table>
 
@@ -131,15 +93,41 @@
         },
     ]
     
+    function displayCharacters(){
+        const characterList = document.querySelector("#characterList");
+
+        characterList.innerHTML = "";
+
+        characters.forEach(function(character){
+            const row = document.createElement("tr");
+
+            row.innerHTML = `
+                <td>${character.num}</td>
+                <td>${character.nickname}</td>
+                <td>${character.class}</td>
+                <td>${character.level}</td>
+                <td>${character.attack}</td>
+                <td>${character.defense}</td>
+                <td>${character.speed}</td>
+                <td>
+                    <button>수정</button>
+                    <button>삭제</button>
+                </td>
+            `;
+
+            characterList.appendChild(row);
+        })
+    }
+
     document.getElementById("characterInfo").addEventListener("submit", function(event){
+        event.preventDefault();
+
         const nickname = document.getElementById("nickname").value;
         const uClass = document.getElementById("uClass").value;
         const level = document.getElementById("level").value;
         const atk = document.getElementById("atk").value;
         const def = document.getElementById("def").value;
         const spd = document.getElementById("spd").value;
-
-        event.preventDefault();
 
         characters.push({
             num: ++index,
@@ -150,5 +138,9 @@
             defense: def,
             speed: spd
         });
+
+        displayCharacters();
     })
+
+    displayCharacters();
 </script>
