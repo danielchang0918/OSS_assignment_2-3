@@ -64,6 +64,7 @@
 <script>
     let index = 3;
 
+    //초기 데이터
     let characters = [
         {
             num: 1,
@@ -94,6 +95,11 @@
         },
     ]
 
+    function editCharacter(num){
+        alert(num);
+    }
+
+    //화면 갱신 함수
     function renderCharacters() {
         const characterList = document.querySelector("#characterList");
 
@@ -111,7 +117,7 @@
                 <td>${character.defense}</td>
                 <td>${character.speed}</td>
                 <td>
-                    <button>수정</button>
+                    <button onclick="editCharacter(${character.num})">수정</button>
                     <button>삭제</button>
                 </td>
             `;
@@ -120,6 +126,7 @@
         })
     }
 
+    //validation 함수
     function validate(character) {
         if (character.nickname.length < 2 || character.nickname.length > 10) {
             alert("닉네임은 2~10글자 사이로 입력해주세요.");
@@ -154,6 +161,7 @@
         return true;
     }
 
+    //생성 버튼 클릭 시 
     document.getElementById("characterInfo").addEventListener("submit", function (event) {
         event.preventDefault();
 
@@ -164,6 +172,7 @@
         const def = Number(document.getElementById("def").value);
         const spd = Number(document.getElementById("spd").value);
 
+        //캐릭터 객체 생성
         const character = {
             nickname: nickname,
             class: uClass,
@@ -173,6 +182,7 @@
             speed: spd
         };
 
+        //validate 통과 시 생성 
         if(validate(character)){
             character.num = ++index;
             characters.push(character);
@@ -181,5 +191,6 @@
         }
     })
 
+    //초기 화면 생성
     renderCharacters();
 </script>
