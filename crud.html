@@ -12,26 +12,26 @@
     <h1>RPG 게임 캐릭터 관리</h1>
 
     <form id="characterInfo">
-        <label>닉네임</label>
-        <input type="text"><br>
-        <label>클래스</label>
-        <select>
+        <label for="nickname">닉네임</label>
+        <input type="text" id="nickname" required><br>
+        <label for="uClass">클래스</label>
+        <select id="uClass" required>
             <option value="warrior">전사</option>
-            <option value="warrior">궁수</option>
-            <option value="warrior">마법사</option>
-            <option value="warrior">도적</option>
-            <option value="warrior">성기사</option>
+            <option value="archer">궁수</option>
+            <option value="wizard">마법사</option>
+            <option value="thief">도적</option>
+            <option value="paladin">성기사</option>
         </select><br>
-        <label>레벨</label>
-        <input type="number"><br>
-        <label>공격력</label>
-        <input type="number"><br>
-        <label>수비력</label>
-        <input type="number"><br>
-        <label>스피드</label>
-        <input type="number"><br>
+        <label for="level">레벨</label>
+        <input type="number" id="level" required><br>
+        <label for="atk">공격력</label>
+        <input type="number" id="atk" required><br>
+        <label for="def">수비력</label>
+        <input type="number" id="def" required><br>
+        <label for="spd">스피드</label>
+        <input type="number" id="spd" required><br>
 
-        <button>생성</button>
+        <button type="submit">생성</button>
     </form>
 
     <hr>
@@ -46,6 +46,7 @@
                 <th>공격력</th>
                 <th>수비력</th>
                 <th>스피드</th>
+                <th></th>
             </tr>
         </thead>
 
@@ -58,6 +59,10 @@
                 <td>85</td>
                 <td>20</td>
                 <td>150</td>
+                <td>
+                    <button>수정</button>
+                    <button>삭제</button>
+                </td>
             </tr>
             <tr>
                 <td>2</td>
@@ -67,6 +72,10 @@
                 <td>70</td>
                 <td>80</td>
                 <td>30</td>
+                <td>
+                    <button>수정</button>
+                    <button>삭제</button>
+                </td>
             </tr>
             <tr>
                 <td>3</td>
@@ -76,6 +85,10 @@
                 <td>120</td>
                 <td>20</td>
                 <td>60</td>
+                <td>
+                    <button>수정</button>
+                    <button>삭제</button>
+                </td>
             </tr>
         </tbody>
     </table>
@@ -86,8 +99,11 @@
 </html>
 
 <script>
+    let index = 3;
+
     let characters = [
         {
+            num: 1,
             nickname: "아르테미스",
             class: "궁수",
             level: 100,
@@ -96,6 +112,7 @@
             speed: 150
         },
         {
+            num: 2,
             nickname: "카이저",
             class: "전사",
             level: 83,
@@ -104,6 +121,7 @@
             speed: 30
         },
         {
+            num: 3,
             nickname: "스펠위버",
             class: "마법사",
             level: 140,
@@ -112,4 +130,25 @@
             speed: 60
         },
     ]
+    
+    document.getElementById("characterInfo").addEventListener("submit", function(event){
+        const nickname = document.getElementById("nickname").value;
+        const uClass = document.getElementById("uClass").value;
+        const level = document.getElementById("level").value;
+        const atk = document.getElementById("atk").value;
+        const def = document.getElementById("def").value;
+        const spd = document.getElementById("spd").value;
+
+        event.preventDefault();
+
+        characters.push({
+            num: ++index,
+            nickname: nickname,
+            class: uClass,
+            level: level,
+            attack: atk,
+            defense: def,
+            speed: spd
+        });
+    })
 </script>
