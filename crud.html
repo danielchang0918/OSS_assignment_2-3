@@ -6,6 +6,98 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>게임 캐릭터창</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        body{
+            background-color: rgb(181, 222, 235);
+            padding: 20px 20px;
+        }
+
+        h1{
+            margin-bottom: 20px;
+        }
+
+        label{
+            display: inline-block;
+            width: 70px;
+        }
+
+        form{
+            padding: 20px;
+            border: 1px solid black;
+            border-radius: 10px;
+            background-color: #a6cef5;
+        }
+
+        input,
+        select{
+            margin: 5px;
+            padding: 7px;
+            border: 1px solid black;
+            border-radius: 5px;
+        }
+
+        input:focus,
+        select:focus{
+            outline:none;
+            border-color : lightblue; 
+            background-color: rgb(236, 234, 234);
+        }
+
+        button{
+            padding: 7px 12px;
+            margin: 5px;
+            border: none;
+            border-radius: 5px;
+            background-color: rgb(65, 65, 240);
+            color: white;
+        }
+
+        button:hover{
+            background-color: #2f5fa7;
+        }
+
+        table{
+           text-align: center;
+        }
+
+        th{
+            padding: 10px;
+            background-color: #faf4bb;
+            border: 1px solid black;
+        }
+
+        td{
+            padding: 10px;
+            border: 1px solid black;
+        }
+
+        tbody tr:hover{
+            background-color: rgb(148, 215, 238);
+        }
+
+        th:last-child{
+            background-color: rgb(181, 222, 235);;
+            border:none;
+        }
+
+        .button-cell{
+            border:none;
+        }
+
+        td>button:first-child{
+            background-color: #38bd7f;
+        }
+        td>button:first-child:hover{
+            background-color: #259963;
+        }
+        td>button:last-child{
+            background-color: rgb(223, 119, 119);
+        }
+        td>button:last-child:hover{
+            background-color: rgb(192, 89, 89);
+        }
+
+    </style>
 </head>
 
 <body>
@@ -141,7 +233,7 @@
                 <td>${character.attack}</td>
                 <td>${character.defense}</td>
                 <td>${character.speed}</td>
-                <td>
+                <td class="button-cell">
                     <button onclick="editCharacter(${character.num})">수정</button>
                     <button onclick="deleteCharacter(${character.num})">삭제</button>
                 </td>
@@ -155,31 +247,37 @@
     function validate(character) {
         if (character.nickname.length < 2 || character.nickname.length > 10) {
             alert("닉네임은 2~10글자 사이로 입력해주세요.");
+            nickname.focus();
             return false;
         }
 
         if (character.class === "") {
             alert("클래스를 선택하세요.");
+            uClass.focus();
             return false;
         }
 
         if (character.level < 1 || character.level > 200) {
             alert("레벨은 1~200 사이로 입력해주세요.");
+            level.focus();
             return false;
         }
 
         if (character.attack <= 0) {
             alert("공격력은 1 이상이어야 합니다.");
+            atk.focus();
             return false;
         }
 
         if (character.defense <= 0) {
             alert("수비력은 1 이상이어야 합니다.");
+            def.focus();
             return false;
         }
 
         if (character.speed <= 0) {
             alert("스피드는 1 이상이어야 합니다.");
+            spd.focus();
             return false;
         }
 
