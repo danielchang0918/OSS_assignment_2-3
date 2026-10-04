@@ -111,6 +111,19 @@
         document.getElementById("spd").value = character.speed;
     }
 
+    //삭제
+    function deleteCharacter(num){
+        const character = characters.find(function(character){
+            return character.num === num;
+        })
+
+        if(confirm("정말 삭제하시겠습니까?")){
+            const index = characters.indexOf(character);
+            characters.splice(index, 1);
+            renderCharacters();
+        }
+    }
+
     //화면 갱신 함수
     function renderCharacters() {
         const characterList = document.querySelector("#characterList");
@@ -130,7 +143,7 @@
                 <td>${character.speed}</td>
                 <td>
                     <button onclick="editCharacter(${character.num})">수정</button>
-                    <button>삭제</button>
+                    <button onclick="deleteCharacter(${character.num})">삭제</button>
                 </td>
             `;
 
@@ -200,6 +213,7 @@
                 character.num = ++index;
                 characters.push(character);
             }else{ //기존 캐릭터 수정
+                character.num = characters[editIndex].num;
                 characters[editIndex] = character;
                 editIndex = -1;
             }
