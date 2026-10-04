@@ -63,6 +63,7 @@
 
 <script>
     let index = 3;
+    let editIndex = -1; //수정용 변수
 
     //초기 데이터
     let characters = [
@@ -95,8 +96,19 @@
         },
     ]
 
+    //수정
     function editCharacter(num){
-        alert(num);
+        const character = characters.find(function(character){
+            return character.num === num;
+        })
+
+        editIndex = num-1;
+        document.getElementById("nickname").value = character.nickname;
+        document.getElementById("uClass").value = character.class;
+        document.getElementById("level").value = character.level;
+        document.getElementById("atk").value = character.attack;
+        document.getElementById("def").value = character.defense;
+        document.getElementById("spd").value = character.speed;
     }
 
     //화면 갱신 함수
@@ -184,8 +196,13 @@
 
         //validate 통과 시 생성 
         if(validate(character)){
-            character.num = ++index;
-            characters.push(character);
+            if(editIndex === -1){ //새 캐릭터 생성
+                character.num = ++index;
+                characters.push(character);
+            }else{ //기존 캐릭터 수정
+                characters[editIndex] = character;
+                editIndex = -1;
+            }
             renderCharacters();
             document.querySelector("#characterInfo").reset();
         }
