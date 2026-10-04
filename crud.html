@@ -24,13 +24,13 @@
             <option value="성기사">성기사</option>
         </select><br>
         <label for="level">레벨</label>
-        <input type="number" id="level" required><br>
+        <input type="number" id="level"><br>
         <label for="atk">공격력</label>
-        <input type="number" id="atk" required><br>
+        <input type="number" id="atk"><br>
         <label for="def">수비력</label>
-        <input type="number" id="def" required><br>
+        <input type="number" id="def"><br>
         <label for="spd">스피드</label>
-        <input type="number" id="spd" required><br>
+        <input type="number" id="spd"><br>
 
         <button type="submit">생성</button>
     </form>
@@ -52,7 +52,7 @@
         </thead>
 
         <tbody id="characterList">
-            
+
         </tbody>
     </table>
 
@@ -93,13 +93,13 @@
             speed: 60
         },
     ]
-    
-    function renderCharacters(){
+
+    function renderCharacters() {
         const characterList = document.querySelector("#characterList");
 
         characterList.innerHTML = "";
 
-        characters.forEach(function(character){
+        characters.forEach(function (character) {
             const row = document.createElement("tr");
 
             row.innerHTML = `
@@ -120,7 +120,41 @@
         })
     }
 
-    document.getElementById("characterInfo").addEventListener("submit", function(event){
+    function validate(character) {
+        if (character.nickname.length < 2 || character.nickname.length > 10) {
+            alert("닉네임은 2~10글자 사이로 입력해주세요.");
+            return false;
+        }
+
+        if (character.class === "") {
+            alert("클래스를 선택하세요.");
+            return false;
+        }
+
+        if (character.level < 1 || character.level > 200) {
+            alert("레벨은 1~200 사이로 입력해주세요.");
+            return false;
+        }
+
+        if (character.attack <= 0) {
+            alert("공격력은 1 이상이어야 합니다.");
+            return false;
+        }
+
+        if (character.defense <= 0) {
+            alert("수비력은 1 이상이어야 합니다.");
+            return false;
+        }
+
+        if (character.speed <= 0) {
+            alert("스피드는 1 이상이어야 합니다.");
+            return false;
+        }
+
+        return true;
+    }
+
+    document.getElementById("characterInfo").addEventListener("submit", function (event) {
         event.preventDefault();
 
         const nickname = document.getElementById("nickname").value;
@@ -130,47 +164,21 @@
         const def = Number(document.getElementById("def").value);
         const spd = Number(document.getElementById("spd").value);
 
-        if(nickname.length < 2 || nickname.length > 10){
-            alert("닉네임은 2~10글자 사이로 입력해주세요.");
-            return;
-        }
-
-        if(uClass===""){
-            alert("클래스를 선택하세요.");
-            return;
-        }
-
-        if(level < 1 || level > 200){
-            alert("레벨은 1~200 사이로 입력해주세요.");
-            return;
-        }
-
-        if(atk < 0){
-            alert("공격력은 0 이상이어야 합니다.");
-            return;
-        }
-
-        if(def < 0){
-            alert("수비력은 0 이상이어야 합니다.");
-            return;
-        }
-
-        if(spd < 0){
-            alert("스피드는 0 이상이어야 합니다.");
-            return;
-        }
-
-        characters.push({
-            num: ++index,
+        const character = {
             nickname: nickname,
             class: uClass,
             level: level,
             attack: atk,
             defense: def,
             speed: spd
-        }); 
+        };
 
-        renderCharacters();
+        if(validate(character)){
+            character.num = ++index;
+            characters.push(character);
+            renderCharacters();
+            document.querySelector("#characterInfo").reset();
+        }
     })
 
     renderCharacters();
